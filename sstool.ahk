@@ -2,6 +2,9 @@
 
 SetWorkingDir, %A_ScriptDir%    
 
+IniRead, dir, setting.ini, common, dir
+IniRead, fname, setting.ini, common, fname
+
 IniRead, pos1def, setting.ini, ss1, pos1def
 IniRead, pos2def, setting.ini, ss1, pos2def
 IniRead, pos3def, setting.ini, ss1, pos3def
@@ -24,17 +27,23 @@ Gui, Add, Edit, w50 xs+170 ys+0 vpos6, %pos6def%
 Gui, Add, Edit, w50 xs+240 ys+0 vpos7, %pos7def%
 Gui, Add, Edit, w50 xs+310 ys+0 vpos8, %pos8def%
 
+Gui, Add, Text, xs+0 ys+50 Section, 出力フォルダ名
+Gui, Add, Edit, w100 xs+100 ys+0 vdir, %dir%
+
+Gui, Add, Text, xs+0 Section, 先頭ファイル名
+Gui, Add, Edit, w100 xs+100 ys+0 vfname, %fname%
+
 Gui, Show
 Return
 
 Cap1:
 Gui, Submit, NoHide
-text := "powershell.exe -file ./ps/sstool.ps1 -pos1 " .  pos1 . " -pos2 " . pos2 . " -pos3 " . pos3 . " -pos4 " . pos4
+text := "powershell.exe -file ./ps/sstool.ps1 -pos1 " .  pos1 . " -pos2 " . pos2 . " -pos3 " . pos3 . " -pos4 " . pos4 . " -dir " . dir . " -fname " . fname
 RunWait, %text%,,Hide
 Return
 
 Cap2:
 Gui, Submit, NoHide
-text := "powershell.exe -file ./ps/sstool.ps1 -pos1 " .  pos5 . " -pos2 " . pos6 . " -pos3 " . pos7 . " -pos4 " . pos8
+text := "powershell.exe -file ./ps/sstool.ps1 -pos1 " .  pos5 . " -pos2 " . pos6 . " -pos3 " . pos7 . " -pos4 " . pos8 . " -dir " . dir . " -fname " . fname
 RunWait, %text%,,Hide
 Return
