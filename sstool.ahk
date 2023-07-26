@@ -15,23 +15,24 @@ IniRead, pos6def, setting.ini, ss2, pos2def
 IniRead, pos7def, setting.ini, ss2, pos3def
 IniRead, pos8def, setting.ini, ss2, pos4def
 
-Gui, Add, Button, gCap1 Section, SHOT SCREEN
-Gui, Add, Edit, w50 xs+100 ys+0 vpos1, %pos1def%
-Gui, Add, Edit, w50 xs+170 ys+0 vpos2, %pos2def%
-Gui, Add, Edit, w50 xs+240 ys+0 vpos3, %pos3def%
-Gui, Add, Edit, w50 xs+310 ys+0 vpos4, %pos4def%
+Gui, Add, Button, gCap1 Section, SHOT SCREEN（&A）
+onclick := msgbox a
+Gui, Add, Edit, w50 xs+130 ys+0 vpos1, %pos1def%
+Gui, Add, Edit, w50 xs+200 ys+0 vpos2, %pos2def%
+Gui, Add, Edit, w50 xs+270 ys+0 vpos3, %pos3def%
+Gui, Add, Edit, w50 xs+340 ys+0 vpos4, %pos4def%
 
-Gui, Add, Button, gCap2 xs+0 Section, SHOT SCREEN
-Gui, Add, Edit, w50 xs+100 ys+0 vpos5, %pos5def%
-Gui, Add, Edit, w50 xs+170 ys+0 vpos6, %pos6def%
-Gui, Add, Edit, w50 xs+240 ys+0 vpos7, %pos7def%
-Gui, Add, Edit, w50 xs+310 ys+0 vpos8, %pos8def%
+Gui, Add, Button, xm+0 gCap2 Section, SHOT SCREEN（&B）
+Gui, Add, Edit, w50 xs+130 ys+0 vpos5, %pos5def%
+Gui, Add, Edit, w50 xs+200 ys+0 vpos6, %pos6def%
+Gui, Add, Edit, w50 xs+270 ys+0 vpos7, %pos7def%
+Gui, Add, Edit, w50 xs+340 ys+0 vpos8, %pos8def%
 
-Gui, Add, Text, xs+0 ys+50 Section, 出力フォルダ名
-Gui, Add, Edit, w100 xs+100 ys+0 vdir, %dir%
+Gui, Add, Text, xm+0 y+20 Section, 出力フォルダ名
+Gui, Add, Edit, w200 xs+100 ys+0 vdir, %dir%
 
 Gui, Add, Text, xs+0 Section, 先頭ファイル名
-Gui, Add, Edit, w100 xs+100 ys+0 vfname, %fname%
+Gui, Add, Edit, w200 xs+100 ys+0 vfname, %fname%
 
 Gui, Show
 Return
