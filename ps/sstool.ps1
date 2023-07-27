@@ -20,8 +20,23 @@ $graphic=[System.Drawing.Graphics]::FromImage($bmp)
 $ArrowCursor = [System.Windows.Forms.Cursors]::Arrow
 #現在のカーソル位置取得
 $cursorPosition=[System.Windows.Forms.Cursor]::Position
+
+#DPI Scalingの取得
+$DPISetting = (Get-ItemProperty 'HKCU:\Control Panel\Desktop\WindowMetrics' -Name AppliedDPI).AppliedDPI
+switch ($DPISetting){
+	96 {$ActualDPI = 100}
+	120 {$ActualDPI = 125}
+	144 {$ActualDPI = 150}
+	192 {$ActualDPI = 200}
+}
+[float]$DisplayScale=($ActualDPI /100)
+
+#カーソル位置補正（スケーリング対応）
+[float]$PositionX=(($CursorPosition.x)*$DisplayScale)
+[float]$PositionY=(($CursorPosition.y)*$DisplayScale)
+
 #矩形生成
-$Rectangle = New-Object -TypeName System.Drawing.Rectangle($CursorPosition.x,$CursorPosition.y,0,0)
+$Rectangle = New-Object -TypeName System.Drawing.Rectangle($PositionX,$PositionY,0,0)
 #カーソル書込み
 $ArrowCursor.Draw($graphic,$Rectangle)
 
@@ -33,4 +48,5 @@ $path = ".\" + $dir
 $path = Convert-Path $path
 $bmp.Save($path + "\" + $fname +"_$(get-date -Format 'yyyyMMdd-hhmmss').png")
 
+$graphic.Dispose()
 $bmp.Dispose()
