@@ -35,8 +35,6 @@ switch ($DPISetting){
 [float]$PositionX=(($CursorPosition.x)*$DisplayScale)
 [float]$PositionY=(($CursorPosition.y)*$DisplayScale)
 
-[System.Windows.Forms.MessageBox]::Show(($PositionX-$pos1))
-
 #矩形生成
 $Rectangle = New-Object -TypeName System.Drawing.Rectangle(($PositionX-$pos1),($PositionY-$pos2),0,0)
 #カーソル書込み
@@ -52,3 +50,6 @@ $bmp.Save($path + "\" + $fname +"_$(get-date -Format 'yyyyMMdd-hhmmss').png")
 
 $graphic.Dispose()
 $bmp.Dispose()
+
+#debug
+#[System.Windows.Forms.MessageBox]::Show(($PositionX-$pos1))
