@@ -16,12 +16,12 @@ $graphic=[System.Drawing.Graphics]::FromImage($bmp)
 
 ($graphic).CopyFromscreen($rect.left,$rect.top,0,0,$bmp.size)
 
-#çŸ¢å°ã®ã‚«ãƒ¼ã‚½ãƒ«å–å¾—
+#–îˆó‚ÌƒJ[ƒ\ƒ‹æ“¾
 $ArrowCursor = [System.Windows.Forms.Cursors]::Arrow
-#ç¾åœ¨ã®ã‚«ãƒ¼ã‚½ãƒ«ä½ç½®å–å¾—
+#Œ»İ‚ÌƒJ[ƒ\ƒ‹ˆÊ’uæ“¾
 $cursorPosition=[System.Windows.Forms.Cursor]::Position
 
-#DPI Scalingã®å–å¾—
+#DPI Scaling‚Ìæ“¾
 $DPISetting = (Get-ItemProperty 'HKCU:\Control Panel\Desktop\WindowMetrics' -Name AppliedDPI).AppliedDPI
 switch ($DPISetting){
 	96 {$ActualDPI = 100}
@@ -31,13 +31,15 @@ switch ($DPISetting){
 }
 [float]$DisplayScale=($ActualDPI /100)
 
-#ã‚«ãƒ¼ã‚½ãƒ«ä½ç½®è£œæ­£ï¼ˆã‚¹ã‚±ãƒ¼ãƒªãƒ³ã‚°å¯¾å¿œï¼‰
+#ƒJ[ƒ\ƒ‹ˆÊ’u•â³iƒXƒP[ƒŠƒ“ƒO‘Î‰j
 [float]$PositionX=(($CursorPosition.x)*$DisplayScale)
 [float]$PositionY=(($CursorPosition.y)*$DisplayScale)
 
-#çŸ©å½¢ç”Ÿæˆ
-$Rectangle = New-Object -TypeName System.Drawing.Rectangle($PositionX,$PositionY,0,0)
-#ã‚«ãƒ¼ã‚½ãƒ«æ›¸è¾¼ã¿
+[System.Windows.Forms.MessageBox]::Show(($PositionX-$pos1))
+
+#‹éŒ`¶¬
+$Rectangle = New-Object -TypeName System.Drawing.Rectangle(($PositionX-$pos1),($PositionY-$pos2),0,0)
+#ƒJ[ƒ\ƒ‹‘‚İ
 $ArrowCursor.Draw($graphic,$Rectangle)
 
 if (-Not (Test-Path $dir)) {
